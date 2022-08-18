@@ -6,7 +6,7 @@ const AddTodo = ({ isEdit, edited, setEdited, updateTodo }) => {
   const addTodo = () => {
     if (!todo.length) return;
     axios
-      .post("https://sa-todo-api.herokuapp.com/todos/new", {
+      .post(`${process.env.REACT_APP.API_URL}/todos/new`, {
         name: todo,
       })
       .then((res) => {

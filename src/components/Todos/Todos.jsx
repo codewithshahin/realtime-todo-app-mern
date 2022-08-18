@@ -6,7 +6,7 @@ import { useState } from "react";
 import AddTodo from "../Add/AddTodo";
 import { io } from "socket.io-client";
 import moment from "moment";
-const socket = io("https://sa-todo-api.herokuapp.com");
+const socket = io(process.env.REACT_APP.API_URL);
 const Todos = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [todos, setTodos] = useState([]);
@@ -16,7 +16,7 @@ const Todos = () => {
   //update
   const updateTodo = () => {
     axios
-      .put(`https://sa-todo-api.herokuapp.com/todos/${id}`, {
+      .put(`${process.env.REACT_APP.API_URL}/todos/${id}`, {
         name: edited,
       })
       .then((res) => {})
@@ -33,7 +33,7 @@ const Todos = () => {
   //marked as done
   const handleDone = (id) => {
     axios
-      .put(`https://sa-todo-api.herokuapp.com/todos/${id}`, {
+      .put(`${process.env.REACT_APP.API_URL}/todos/${id}`, {
         done: true,
       })
       .then((res) => {})
@@ -45,7 +45,7 @@ const Todos = () => {
   //marked as undone
   const handleClear = (id) => {
     axios
-      .put(`https://sa-todo-api.herokuapp.com/todos/${id}`, {
+      .put(`${process.env.REACT_APP.API_URL}/todos/${id}`, {
         done: false,
       })
       .then((res) => {})
@@ -57,7 +57,7 @@ const Todos = () => {
   //delete
   const deleteTodo = (id) => {
     axios
-      .delete(`https://sa-todo-api.herokuapp.com/todos/${id}`)
+      .delete(`${process.env.REACT_APP.API_URL}/todos/${id}`)
       .then((res) => {
         // setTodos(todos.filter((i) => i._id != id));
       })
@@ -98,7 +98,7 @@ const Todos = () => {
 
   useEffect(() => {
     axios
-      .get("https://sa-todo-api.herokuapp.com/todos")
+      .get(`${process.env.REACT_APP.API_URL}/todos`)
       .then((res) => {
         setTodos(res.data);
       })
